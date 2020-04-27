@@ -1,0 +1,7 @@
+{
+  "name": "kw13-api",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Luiz Pires <kw13code@gmail.com>",
+  "license": "MIT"
+}
