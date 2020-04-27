@@ -1,12 +1,14 @@
 {
-    "name": "kw13/api",
-    "description": "Gerenciador de portfólios",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Luiz Pires",
-            "email": "kw13code@gmail.com"
-        }
-    ],
-    "require": {}
+  "name": "kw13/api",
+  "description": "Gerenciador de portfólios",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Luiz Pires",
+      "email": "kw13code@gmail.com"
+    }
+  ],
+  "require": {
+    "barryvdh/composer-cleanup-plugin": "0.2.x"
+  }
 }
