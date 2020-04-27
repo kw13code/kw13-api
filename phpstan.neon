@@ -4,3 +4,4 @@ parameters:
     tmpDir: tmp/
     excludes_analyse:
         - phpinsights.php
+        - tests
