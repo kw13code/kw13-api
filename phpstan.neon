@@ -1,0 +1,6 @@
+parameters:
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
+    tmpDir: tmp/
+    excludes_analyse:
+        - phpinsights.php
