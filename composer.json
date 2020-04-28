@@ -8,6 +8,11 @@
       "email": "kw13code@gmail.com"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
   "require": {
     "barryvdh/composer-cleanup-plugin": "0.2.x"
   },
@@ -16,7 +21,8 @@
     "phpstan/phpstan": "^0.12.19",
     "nunomaduro/phpinsights": "^1.14",
     "codeception/codeception": "^4.1",
-    "codeception/module-asserts": "^1.0.0"
+    "codeception/module-asserts": "^1.0.0",
+    "php-coveralls/php-coveralls": "^2.2"
   },
   "scripts": {
     "test:unit": "php vendor/bin/codecept run unit",
