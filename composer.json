@@ -21,7 +21,9 @@
     "phpstan/phpstan": "^0.12.19",
     "nunomaduro/phpinsights": "^1.14",
     "codeception/codeception": "^4.1",
-    "php-coveralls/php-coveralls": "^2.2"
+    "php-coveralls/php-coveralls": "^2.2",
+    "phpunit/phpunit": "^9",
+    "spatie/phpunit-watcher": "^1.22"
   },
   "scripts": {
     "phpcs": "vendor/bin/phpcs --standard=PSR12 src/",
