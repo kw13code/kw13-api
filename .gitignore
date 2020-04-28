@@ -24,3 +24,5 @@ Homestead.json
 /tmp
 .idea
 mariadb/
+coverage-report/
+dist/
