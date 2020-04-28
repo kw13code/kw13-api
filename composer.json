@@ -21,11 +21,9 @@
     "phpstan/phpstan": "^0.12.19",
     "nunomaduro/phpinsights": "^1.14",
     "codeception/codeception": "^4.1",
-    "codeception/module-asserts": "^1.0.0",
     "php-coveralls/php-coveralls": "^2.2"
   },
   "scripts": {
-    "test:unit": "php vendor/bin/codecept run unit",
     "phpcs": "vendor/bin/phpcs --standard=PSR12 src/",
     "phpcbf": "vendor/bin/phpcbf --standard=PSR12 src/",
     "phpstan": "vendor/bin/phpstan analyse -l 7 src",
