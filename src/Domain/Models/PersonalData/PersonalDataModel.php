@@ -7,6 +7,7 @@ namespace App\Domain\Models\PersonalData;
 class PersonalDataModel
 {
     public int $id;
+    public string $name;
     public string $function;
     public string $birthDate;
     public string $email;

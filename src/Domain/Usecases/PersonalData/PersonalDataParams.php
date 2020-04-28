@@ -6,6 +6,7 @@ namespace App\Domain\Usecases\PersonalData;
 
 class PersonalDataParams
 {
+    public string $name;
     public string $function;
     public string $birthDate;
     public string $email;
