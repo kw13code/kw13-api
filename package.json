@@ -1,0 +1,12 @@
+{
+  "name": "kw13-api",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Luiz Pires <kw13code@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "git-commit-msg-linter": "^2.4.2",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.7"
+  }
+}

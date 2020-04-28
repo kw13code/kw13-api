@@ -1,0 +1,29 @@
+{
+  "name": "kw13/api",
+  "description": "Gerenciador de portfólios",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Luiz Pires",
+      "email": "kw13code@gmail.com"
+    }
+  ],
+  "require": {
+    "barryvdh/composer-cleanup-plugin": "0.2.x"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "3.*",
+    "phpstan/phpstan": "^0.12.19",
+    "nunomaduro/phpinsights": "^1.14",
+    "codeception/codeception": "^4.1",
+    "codeception/module-asserts": "^1.0.0"
+  },
+  "scripts": {
+    "test:unit": "php vendor/bin/codecept run unit",
+    "test:staged": "./vendor/bin/phpinsights",
+    "phpcs": "vendor/bin/phpcs --standard=PSR12 src/",
+    "phpcbf": "vendor/bin/phpcbf --standard=PSR12 src/",
+    "phpstan": "vendor/bin/phpstan analyse -l 7 src",
+    "phpinsights": "./vendor/bin/phpinsights"
+  }
+}
