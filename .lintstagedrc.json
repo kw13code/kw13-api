@@ -1,3 +1,6 @@
 {
-  "*.php": ["php ./vendor/bin/phpstan analyse src -l 7"]
+  "*.php": [
+    "php vendor/bin/codecept run unit",
+    "php ./vendor/bin/phpstan analyse src -l 7"
+  ]
 }
