@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Usecases\PersonalData;
 
-use App\Domain\Models\PersonalDataModel;
+use App\Domain\Models\PersonalData\PersonalDataModel;
 
 interface AddPersonalData
 {
