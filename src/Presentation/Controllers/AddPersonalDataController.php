@@ -22,6 +22,11 @@ class AddPersonalDataController implements Controller
             if (!isset($httpRequest->body['email'])) {
                 return HttpErrorHelper::badRequest(new MissingParamError('email'));
             }
+            if (!isset($httpRequest->body['password'])) {
+                return HttpErrorHelper::badRequest(new MissingParamError('password'));
+            }
+
+            // Em caso de sucesso
             return new HttpResponse(0, null);
         } catch (Exception $error) {
             return HttpErrorHelper::serverError($error->getTrace());
