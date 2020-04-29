@@ -10,9 +10,14 @@ use App\Presentation\Protocols\HttpResponse;
 
 class AddPersonalDataController implements Controller
 {
-    public function handle(
-        HttpRequest $httpRequest
-    ): HttpResponse {
-        return new HttpResponse(400);
+    public function handle(HttpRequest $httpRequest): HttpResponse
+    {
+        if (!isset($httpRequest->body['name'])) {
+            return new HttpResponse(400, null);
+        }
+        if (!isset($httpRequest->body['function'])) {
+            return new HttpResponse(400, null);
+        }
+        return new HttpResponse(0, null);
     }
 }
