@@ -96,6 +96,28 @@ class AddPersonalDataControllerTest extends TestCase
         $this->assertEquals(new MissingParamError('email'), $httpResponse->body);
     }
 
+    public function testDeveRestonar400SeOCampoPasswordNaoForFornecido(): void
+    {
+        $sut = $this->makeSut();
+        $mockHttpRequest = new HttpRequest(
+            [
+                'name' => 'any_name',
+                'email' => 'any_email@mail.com',
+                'function' => 'any_function',
+                'birthDate' => 'any_birthDate',
+                'cellPhone' => 'any_cellphone',
+                'phone' => 'any_phone',
+                'whatsApp' => 'any_wjatsApp',
+                'photo' => 'any_photo',
+                'cv' => 'any_cv',
+                'about' => 'any_about',
+            ]
+        );
+        $httpResponse = $sut->handle($mockHttpRequest);
+        $this->assertEquals(400, $httpResponse->statusCode);
+        $this->assertEquals(new MissingParamError('password'), $httpResponse->body);
+    }
+
 //    public function testDeveRetornar500SempreQueHouverUmaException(): void
 //    {
 //    }
