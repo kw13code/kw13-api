@@ -4,15 +4,24 @@ declare(strict_types=1);
 
 namespace App\Presentation\Controllers;
 
+use App\Presentation\Errors\InvalidParamError;
 use App\Presentation\Errors\MissingParamError;
 use App\Presentation\Helpers\http\HttpErrorHelper;
 use App\Presentation\Protocols\Controller;
+use App\Presentation\Protocols\EmailValidator;
 use App\Presentation\Protocols\HttpRequest;
 use App\Presentation\Protocols\HttpResponse;
 use Exception;
 
 class AddPersonalDataController implements Controller
 {
+    private EmailValidator $emailValidator;
+
+    public function __construct(EmailValidator $emailValidator)
+    {
+        $this->emailValidator = $emailValidator;
+    }
+
     public function handle(HttpRequest $httpRequest): HttpResponse
     {
         try {
@@ -26,6 +35,10 @@ class AddPersonalDataController implements Controller
                 return HttpErrorHelper::badRequest(new MissingParamError('password'));
             }
 
+            $emailIsValid = $this->emailValidator->isValid($httpRequest->body['email']);
+            if (!$emailIsValid) {
+                return HttpErrorHelper::invalidParamError(new InvalidParamError('email'));
+            }
             // Em caso de sucesso
             return new HttpResponse(0, null);
         } catch (Exception $error) {

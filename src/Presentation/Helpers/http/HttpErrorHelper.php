@@ -26,4 +26,10 @@ class HttpErrorHelper
     {
         return new HttpResponse(500, (object)$errorTrace);
     }
+
+    public static function invalidParamError(Exception $error): HttpResponse
+    {
+        return new HttpResponse(400, $error);
+    }
+
 }
