@@ -4,20 +4,27 @@ declare(strict_types=1);
 
 namespace App\Presentation\Controllers;
 
+use App\Presentation\Errors\MissingParamError;
+use App\Presentation\Helpers\http\HttpErrorHelper;
 use App\Presentation\Protocols\Controller;
 use App\Presentation\Protocols\HttpRequest;
 use App\Presentation\Protocols\HttpResponse;
+use Exception;
 
 class AddPersonalDataController implements Controller
 {
     public function handle(HttpRequest $httpRequest): HttpResponse
     {
-        if (!isset($httpRequest->body['name'])) {
-            return new HttpResponse(400, null);
+        try {
+            if (!isset($httpRequest->body['name'])) {
+                return HttpErrorHelper::badRequest(new MissingParamError('name'));
+            }
+            if (!isset($httpRequest->body['email'])) {
+                return HttpErrorHelper::badRequest(new MissingParamError('email'));
+            }
+            return new HttpResponse(0, null);
+        } catch (Exception $error) {
+            return HttpErrorHelper::serverError($error->getTrace());
         }
-        if (!isset($httpRequest->body['function'])) {
-            return new HttpResponse(400, null);
-        }
-        return new HttpResponse(0, null);
     }
 }
