@@ -3,7 +3,8 @@
 namespace App\Presentation\Controllers;
 
 use App\Domain\Models\PersonalData\PersonalDataModel;
-use App\Domain\Tests\MocksPersonalData;
+use App\Presentation\Errors\MissingParamError;
+use App\Presentation\Helpers\http\HttpErrorHelper;
 use App\Presentation\Protocols\HttpRequest;
 use PHPUnit\Framework\TestCase;
 
@@ -45,14 +46,6 @@ class AddPersonalDataControllerTest extends TestCase
             ]
         );
     }
-//    protected function mockHttpRequest(): HttpRequest
-//    {
-//        $mockPersonalData = new MocksPersonalData();
-//
-//        return new HttpRequest(
-//            array($mockPersonalData->mockPersonalDataParams())
-//        );
-//    }
 
     protected function makeSut(): AddPersonalDataController
     {
@@ -64,41 +57,43 @@ class AddPersonalDataControllerTest extends TestCase
         $sut = $this->makeSut();
         $mockHttpRequest = new HttpRequest(
             [
-                "function" => 'any_function',
-                "birthDate" => 'any_birthDate',
-                "email" => 'any_email@mail.com',
-                "cellPhone" => 'any_cellphone',
-                "phone" => 'any_phone',
-                "whatsApp" => 'any_wjatsApp',
-                "photo" => 'any_photo',
-                "cv" => 'any_cv',
-                "about" => 'any_about',
-                "password" => 'any_password',
+                'function' => 'any_function',
+                'birthDate' => 'any_birthDate',
+                'email' => 'any_email@mail.com',
+                'cellPhone' => 'any_cellphone',
+                'phone' => 'any_phone',
+                'whatsApp' => 'any_wjatsApp',
+                'photo' => 'any_photo',
+                'cv' => 'any_cv',
+                'about' => 'any_about',
+                'password' => 'any_password',
             ]
         );
         $httpResponse = $sut->handle($mockHttpRequest);
         $this->assertEquals(400, $httpResponse->statusCode);
+        $this->assertEquals(new MissingParamError('name'), $httpResponse->body);
     }
 
-    public function testDeveRestonar400SeOCampoFunctionNaoForFornecido(): void
+    public function testDeveRestonar400SeOCampoEmailNaoForFornecido(): void
     {
         $sut = $this->makeSut();
         $mockHttpRequest = new HttpRequest(
             [
-                "name" => 'any_name',
-                "birthDate" => 'any_birthDate',
-                "email" => 'any_email@mail.com',
-                "cellPhone" => 'any_cellphone',
-                "phone" => 'any_phone',
-                "whatsApp" => 'any_wjatsApp',
-                "photo" => 'any_photo',
-                "cv" => 'any_cv',
-                "about" => 'any_about',
-                "password" => 'any_password',
+                'name' => 'any_name',
+                'function' => 'any_function',
+                'birthDate' => 'any_birthDate',
+                'cellPhone' => 'any_cellphone',
+                'phone' => 'any_phone',
+                'whatsApp' => 'any_wjatsApp',
+                'photo' => 'any_photo',
+                'cv' => 'any_cv',
+                'about' => 'any_about',
+                'password' => 'any_password',
             ]
         );
         $httpResponse = $sut->handle($mockHttpRequest);
         $this->assertEquals(400, $httpResponse->statusCode);
+        $this->assertEquals(new MissingParamError('email'), $httpResponse->body);
     }
 
 //    public function testDeveRetornar500SempreQueHouverUmaException(): void
