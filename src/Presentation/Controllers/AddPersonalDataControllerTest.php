@@ -3,13 +3,23 @@
 namespace App\Presentation\Controllers;
 
 use App\Domain\Models\PersonalData\PersonalDataModel;
+use App\Presentation\Errors\InvalidParamError;
 use App\Presentation\Errors\MissingParamError;
-use App\Presentation\Helpers\http\HttpErrorHelper;
+use App\Presentation\Protocols\EmailValidator;
 use App\Presentation\Protocols\HttpRequest;
 use PHPUnit\Framework\TestCase;
 
 class AddPersonalDataControllerTest extends TestCase
 {
+    private function mockEmailValidator(bool $return = true): EmailValidator
+    {
+        $mockEmailValidator = $this->getMockBuilder(EmailValidator::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockEmailValidator->method('isValid')->willReturn($return);
+        return $mockEmailValidator;
+    }
+
     private function mockPersonalDataModel(): PersonalDataModel
     {
         return new PersonalDataModel(
@@ -49,7 +59,7 @@ class AddPersonalDataControllerTest extends TestCase
 
     protected function makeSut(): AddPersonalDataController
     {
-        return new AddPersonalDataController();
+        return new AddPersonalDataController($this->mockEmailValidator(false));
     }
 
     public function testDeveRestonar400SeOCampoNameNaoForFornecido(): void
@@ -118,7 +128,26 @@ class AddPersonalDataControllerTest extends TestCase
         $this->assertEquals(new MissingParamError('password'), $httpResponse->body);
     }
 
-//    public function testDeveRetornar500SempreQueHouverUmaException(): void
-//    {
-//    }
+    public function testDeveRestonar400SeOEmailNaoForValido(): void
+    {
+        $sut = $this->makeSut();
+        $mockHttpRequest = new HttpRequest(
+            [
+                'name' => 'any_name',
+                'email' => 'invalid_email',
+                'function' => 'any_function',
+                'birthDate' => 'any_birthDate',
+                'cellPhone' => 'any_cellphone',
+                'phone' => 'any_phone',
+                'whatsApp' => 'any_wjatsApp',
+                'photo' => 'any_photo',
+                'cv' => 'any_cv',
+                'about' => 'any_about',
+                'password' => 'any_password'
+            ]
+        );
+        $httpResponse = $sut->handle($mockHttpRequest);
+        $this->assertEquals(400, $httpResponse->statusCode);
+        $this->assertEquals(new InvalidParamError('email'), $httpResponse->body);
+    }
 }
